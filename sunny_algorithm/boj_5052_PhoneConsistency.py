@@ -20,10 +20,10 @@ num = int(input())
 phone = []
 for i in range(num):
     cnt = int(input())
-    phone = [sys.stdin.readline().split('\n')[0] for j in range(cnt)]
+    phone = [sys.stdin.readline().split()[0] for j in range(cnt)]
     phone.sort()
     result = 'YES'
-
+    print(phone)
     for i in range(len(phone)-1):
         if phone[i]==phone[i+1][:len(phone[i])]:
             result = 'NO'
