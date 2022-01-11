@@ -82,18 +82,23 @@ int buy(int mNumber, int mStock, int mQuantity, int mPrice)
 	new->mPrice = mPrice;
 	tmp = g_order;
 	tmp_befo = 0;
+	if (!tmp->next)
+	{
+		tmp->next = new;
+		return (0);
+	}
 	while (tmp->next && tmp->mPrice <= mPrice)
 	{
 		tmp_befo = tmp;
 		tmp = tmp->next;
 	}
-	if (!tmp->next)
-		tmp->next = new;
-	else
+	if (mPrice <= tmp->mPrice)
 	{
 		new->next = tmp;
 		tmp_befo->next = new;
 	}
+	else
+		tmp->next = new;
 
 	return 0;
 }
