@@ -1,15 +1,17 @@
-def start(n):
+def solution(n):
 	if n == 1:
-		return ('*')
-	elif n % 3 != 0:
-		return (' ')
-	print(start(n / 3),start(n / 3),start(n / 3))
-	print(start(n / 3),start((n / 3) + 1),start(n / 3))
-	print(start(n / 3),start(n / 3),start(n / 3))
+		return ['*']
+	star = solution(n // 3)
+	l = []
+	for s in star:
+		l.append(s*3)
+	for s in star:
+		l.append(s + ' '*(n//3) + s)
+	for s in star:
+		l.append(s*3)
+	return l
 
-
-
-
-
-N = int(input())
-start(N)
+n = int(input())
+map = solution(n)
+for i in map:
+	print(i)
