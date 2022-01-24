@@ -1,6 +1,5 @@
 import sys
 
-sys.setrecursionlimit(10**6)
 class Stack:
 	def __init__(self, idx):
 		self.items = []
@@ -29,10 +28,7 @@ def a_to_c_321(frm, tmp, to):
 
 def solution(n, a, b, c):
 	if n == 3:
-		#print(a.items, b.items, c.items)
 		a_to_c_321(a, b, c)
-		# g_n -= 1
-		# print("#########")
 		return
 	solution(n-1, a, c, b)
 	move(a, c)
