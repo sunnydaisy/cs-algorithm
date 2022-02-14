@@ -7,4 +7,3 @@ for _ in range(n):
 	weight, high = map(int, input().split())
 	w_list.append(weight)
 	h_list.append(high)
-
