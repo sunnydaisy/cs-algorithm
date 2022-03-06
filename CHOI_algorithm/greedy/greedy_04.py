@@ -19,12 +19,10 @@
 n = int(input())
 coins = list(map(int, input().split()))
 coins.sort()
-target = 1
-for i in coins:
-	if i 
-
-1, 1, 2, 3
-
-3 > 2
-5 > 3
-8
+A = 1
+for B in coins:
+	if A < B:
+		break
+	A += B
+print(A)
+		
