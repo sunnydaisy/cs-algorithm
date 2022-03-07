@@ -75,5 +75,6 @@ def solution(food_times, k):
 
 
 food_times = [3, 1, 2]
+food_times > 2
 k = 5
-print(solution(food_times, k))
+# print(solution(food_times, k))
