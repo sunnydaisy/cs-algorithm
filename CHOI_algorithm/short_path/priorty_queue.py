@@ -23,7 +23,7 @@ def dijkstra(start):
 	heapq.heappush(q, (0, start))
 	distance[start] = 0
 	while q:
-		dist, now = heapq.heappop(q)
+		dist, now = heapq.heappop(q) # dist 는 시작노드에서 now 노드까지의 거리
 		if distance[now] < dist:
 			continue
 		for i in graph[now]:
