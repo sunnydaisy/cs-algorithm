@@ -1,4 +1,85 @@
 # 무지의 먹방 라이브
+# https://programmers.co.kr/learn/courses/30/lessons/42891#
+
+# 2회 차
+import heapq
+
+# 정확성 (통과) // 효율성 (1개만 통과)
+def solution(food_times, k):
+	INF = int(1e9)
+	now = min(food_times)
+	cnt = len(food_times)
+	while (cnt != 0 and k // cnt >= now): # 도중에 하나 이상이 0이 되는 경우
+		food_times = [i - now for i in food_times]
+		k -= cnt * now
+		now = INF
+		cnt = 0
+		for i in food_times:
+			if i > 0:
+				cnt += 1
+				now = min(now, i)
+	if cnt == 0:
+		return -1
+	if k // cnt > 0:
+		food_times = [i - k // cnt for i in food_times]
+		k %= cnt
+	q = []
+	for key, v in enumerate(food_times):
+		if v > 0:
+			heapq.heappush(q, (key, v))
+	while q:
+		ck = heapq.heappop(q)
+		if k == 0:
+			return ck[0] + 1
+		if ck[1] > 0:
+			heapq.heappush(q, (ck[0], ck[1] - 1))
+		k -= 1
+	return -1
+
+
+
+# def tr1_solution(food_times, k):
+#     INT = int(1e9)
+#     time = 0
+#     count = len(food_times)
+#     now = min(food_times)
+#     while time + now * count < k:
+#         time += now * count
+#         tmp_arr = []
+#         # for i in 
+#         now = min(tmp_arr)
+#         count = len(tmp_arr)
+
+#     for i in range(len(food_times)):
+#         food_times[i] -= now
+
+#     q = deque()
+
+#     for idx, value in enumerate(food_times):
+#         if value > 0:
+#             q.append((idx, value))
+
+#     while time < k and q:
+#         food = q.popleft()
+#         time += 1
+#         if food[1] == 1:
+#             continue
+#         q.append((food[0], food[1] - 1))
+
+#     if time == k and q:
+#         food = q.popleft()
+#         return (food[0] + 1) 
+#     else:
+#         return (-1)
+
+
+food_times = [1, 1, 1, 1, 1, 1]
+k = 5
+
+print(solution(food_times, k))
+
+
+
 
 # 시도 1 (테스트케이스 : 실패)
 
@@ -129,7 +210,7 @@
 
 	
 
-food_times = [4,2,3,6,7,1,5,8]
+# food_times = [4,2,3,6,7,1,5,8]
 
-k = 16
-print(solution(food_times, k))
+# k = 16
+# print(solution(food_times, k))
