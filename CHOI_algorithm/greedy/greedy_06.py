@@ -2,39 +2,39 @@
 # https://programmers.co.kr/learn/courses/30/lessons/42891#
 
 # 2회 차
-import heapq
+# from collections import deque
 
 # 정확성 (통과) // 효율성 (1개만 통과)
-def solution(food_times, k):
-	INF = int(1e9)
-	now = min(food_times)
-	cnt = len(food_times)
-	while (cnt != 0 and k // cnt >= now): # 도중에 하나 이상이 0이 되는 경우
-		food_times = [i - now for i in food_times]
-		k -= cnt * now
-		now = INF
-		cnt = 0
-		for i in food_times:
-			if i > 0:
-				cnt += 1
-				now = min(now, i)
-	if cnt == 0:
-		return -1
-	if k // cnt > 0:
-		food_times = [i - k // cnt for i in food_times]
-		k %= cnt
-	q = []
-	for key, v in enumerate(food_times):
-		if v > 0:
-			heapq.heappush(q, (key, v))
-	while q:
-		ck = heapq.heappop(q)
-		if k == 0:
-			return ck[0] + 1
-		if ck[1] > 0:
-			heapq.heappush(q, (ck[0], ck[1] - 1))
-		k -= 1
-	return -1
+# def tr2_solution(food_times, k):
+# 	INF = int(1e9)
+# 	now = min(food_times)
+# 	cnt = len(food_times)
+# 	while (cnt != 0 and k // cnt >= now): # 도중에 하나 이상이 0이 되는 경우
+# 		food_times = [i - now for i in food_times]
+# 		k -= cnt * now
+# 		now = INF
+# 		cnt = 0
+# 		for i in food_times:
+# 			if i > 0:
+# 				cnt += 1
+# 				now = min(now, i)
+# 	if cnt == 0:
+# 		return -1
+# 	if k // cnt > 0:
+# 		food_times = [i - k // cnt for i in food_times]
+# 		k %= cnt
+# 	q = deque()
+# 	for key, v in enumerate(food_times):
+# 		if v > 0:
+# 			q.append((key ,v))
+# 	while q:
+# 		ck = q.popleft()
+# 		if k == 0:
+# 			return ck[0] + 1
+# 		if ck[1] > 0:
+# 			q.append((ck[0], ck[1] - 1))
+# 		k -= 1
+# 	return -1
 
 
 
@@ -73,10 +73,7 @@ def solution(food_times, k):
 #         return (-1)
 
 
-food_times = [1, 1, 1, 1, 1, 1]
-k = 5
 
-print(solution(food_times, k))
 
 
 
@@ -214,3 +211,33 @@ print(solution(food_times, k))
 
 # k = 16
 # print(solution(food_times, k))
+
+
+# 해설
+import heapq
+
+def solution(food_times, k):
+	if sum(food_times) <= k:
+		return -1
+
+	q = [] # 큐
+	for idx, value in enumerate(food_times):
+		heapq.heappush(q, (value, idx + 1))  # (음식 시간, 음식 순서)
+	
+	previous = 0 # 마지막 음식 시간
+	food_len = len(q) # 음식 개수
+	while (q[0][0] - previous) * food_len <= k:
+		now = heapq.heappop(q)[0]
+		k -= (now - previous) * food_len
+		food_len -= 1
+		previous = now
+	q.sort(key= lambda x : x[1])
+	return q[k % food_len][1]
+	
+
+
+
+food_times = [100000000]
+k = 99999999
+
+print(solution(food_times, k))
