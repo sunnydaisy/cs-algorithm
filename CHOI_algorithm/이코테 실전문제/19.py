@@ -1,16 +1,85 @@
 # 연산자 끼워 넣기
 # https://www.acmicpc.net/problem/14888
 
-import sys
 
-def max_num(num_arr, op_arr):
-	plus, minus, muti, div = op_arr
+# ---------------------------------- 중복조합시도 : 정답 568ms
+# import sys
+# from itertools import permutations
+
+# def solution():
+# 	INF = int(1e9)
+# 	max_num = -INF
+# 	min_num = INF
+
+# 	n = int(input())
+# 	num_arr = list(map(int, sys.stdin.readline().split())) 
+# 	op_arr = list(map(int, sys.stdin.readline().split()))
+# 	op_str = []
+# 	for idx, value in enumerate(op_arr):
+# 		op_str += [idx] * value
+# 	op_str = set(permutations(op_str, n - 1))
+# 	for ops in op_str:
+# 		tmp = num_arr[0]
+# 		for num, op in zip(num_arr[1:], ops):
+# 			if op == 0:
+# 				tmp += num
+# 			elif op == 1:
+# 				tmp -= num
+# 			elif op == 2:
+# 				tmp *= num
+# 			else:
+# 				tmp = int(tmp / num)
+# 		max_num = max(max_num, tmp)
+# 		min_num = min(min_num, tmp)
+# 	print(max_num)
+# 	print(min_num)
+		
+# solution()
 
 
-def solution():
-	n = int(input())
-	num_arr = list(map(int, sys.stdin.readline().split())) 
-	op_arr = list(map(int, sys.stdin.readline().split()))
+
+
+
+# --------------- 해설 : 116ms 그냥 무식하게 돌리면 되는걸 생각 못함 
+# import sys
+
+# INF = int(1e9)
+# max_num = -INF
+# min_num = INF
+
+# n = int(input())
+# num_arr = list(map(int, sys.stdin.readline().split())) 
+# add, sub, mul, div = list(map(int, sys.stdin.readline().split()))
+
+# def dfs(i, now):
+
+# 	global max_num, min_num, n, add, sub, mul, div
+# 	if i == n:
+# 		max_num = max(max_num, now)
+# 		min_num = min(min_num, now)
+# 	else:
+# 		if add > 0:
+# 			add -= 1
+# 			dfs(i + 1, now + num_arr[i])
+# 			add += 1
+# 		if sub > 0:
+# 			sub -= 1
+# 			dfs(i + 1, now - num_arr[i])
+# 			sub += 1
+# 		if mul > 0:
+# 			mul -= 1
+# 			dfs(i + 1, now * num_arr[i])
+# 			mul += 1
+# 		if div > 0:
+# 			div -= 1
+# 			dfs(i + 1, int(now / num_arr[i]))
+# 			div += 1
+		
+
+# dfs(1, num_arr[0])
+# print(max_num)
+# print(min_num)
+
 
 # ------------------------------ 1회차 : 실패 (항상 합보다 곱이 먼저오면 최대값이 된다고 생각했는데 합이 먼저 오고 곱이 오는게 최대값이 될 수 있다는 생각에 포기)
 
@@ -54,5 +123,3 @@ def solution():
 
 
 
-
-solution()
