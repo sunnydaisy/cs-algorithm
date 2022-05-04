@@ -1,6 +1,60 @@
 # 인구 이동
 # https://www.acmicpc.net/problem/16234
 
+
+# ---------------------------------- 해설
+# import sys
+# from collections import deque
+
+# n, l, r = map(int, input().split())
+
+# graph = []
+# for _ in range(n):
+# 	graph.append(list(map(int, sys.stdin.readline().split())))
+
+# def bfs(open_graph, x, y, index):
+# 	united = []
+# 	united.append((x, y))
+# 	dx = [-1, 0, 1, 0]
+# 	dy = [0, 1, 0, -1]
+# 	q = deque()
+# 	q.append((x, y))
+# 	open_graph[x][y] = index
+# 	sum_tmp = graph[x][y] # 인수 수
+# 	count = 1
+# 	while q:
+# 		x, y = q.popleft()
+# 		for i in range(4):
+# 			nx = x + dx[i]
+# 			ny = y + dy[i]
+# 			if 0 <= nx < n and 0 <= ny < n and open_graph[nx][ny] == -1:
+# 				if l <= abs(graph[nx][ny] - graph[x][y]) <= r:
+# 					q.append((nx, ny))
+# 					sum_tmp += graph[nx][ny]
+# 					count += 1
+# 					open_graph[nx][ny] = index
+# 					united.append((nx, ny))
+# 	for i, j in united:
+# 		graph[i][j] = sum_tmp // count
+
+# def solution():
+# 	day = 0
+# 	while day <= 2001:
+# 		open_graph = [[-1] * n for _ in range(n)]
+# 		index = 0
+# 		for i in range(n):
+# 			for j in range(n):
+# 				if open_graph[i][j] == -1:	# 방문한 적이 없는 경우
+# 					bfs(open_graph, i, j, index)
+# 					index += 1
+# 		if index == n * n:
+# 			break
+# 		day += 1
+# 	return day
+
+
+
+# ------------------------------------ 그냥 BFS 로 해봤는데 테스트케이스는 통과했으나 정답이 아님
 import sys
 from collections import deque
 
@@ -48,7 +102,7 @@ def solution():
 			for j in range(n):
 				if visited[i][j] == False:	# 방문한 적이 없는 경우
 					if bfs(graph, visited, i, j) > 1:
-						flag = 1
+						flag = 1		# 이 부분에서 뭔가 잘못되어서 틀린듯
 		if flag == 0:
 			return day
 		day += 1
