@@ -2,26 +2,46 @@
 # https://www.acmicpc.net/problem/18310
 
 
-def search(array, target):
-	i = 1
-	while i < len(array):
-		if 0 <= target - i < len(array) and array[target - i] > 0:
-			return target - i
-		elif  0 <= target + i < len(array) and array[target + i] > 0:
-			return target + i
-		i += 1
-
 def solution():
 	n = int(input())
 	house = list(map(int, input().split()))
-	mean = sum(house) // n
-	if mean in house:
-		return mean
 	house.sort()
-	num_list = [0] * 100001
-	for i in house:
-		num_list[i] += 1
-	return search(house, mean)
+	print(house[(n - 1) // 2])
+solution()
+
+# --------------------------- 2회차 : 실패
+# def search(array, target):
+# 	i = 1
+# 	while i < len(array):
+# 		if 0 <= target - i < len(array) and array[target - i] > 0:
+# 			return target - i
+# 		elif  0 <= target + i < len(array) and array[target + i] > 0:
+# 			return target + i
+# 		i += 1
+
+# def solution():
+# 	n = int(input())
+# 	house = list(map(int, input().split()))
+# 	mean = sum(house) // n
+# 	if mean in house:
+# 		return mean
+# 	# house.sort()
+# 	num_list = [0] * 100001
+# 	for i in house:
+# 		num_list[i] += 1
+	
+# 	return search(num_list, mean)
+"""
+1 2 2 5 9
+중간값 : 3.8
+안테나 2 -> 11
+안테나 5 -> 12
+
+1 2 2 5 10
+중간값 : 4
+안테나 2 -> 12
+안테나 5 -> 15
+"""
 
 
 # ------------------ 1회차 : 실패 (시간초과)
