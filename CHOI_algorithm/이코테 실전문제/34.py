@@ -1,18 +1,20 @@
 # 병사 배치하기
 # https://www.acmicpc.net/problem/18353
 
-def solution():
-    n = int(input())
-    arr = list(map(int, input().split()))
-    arr.reverse()
-    dp = [1] * n
-    for i in range(1, n):
-        for j in range(0, i):
-            if arr[j] < arr[i]:
-                dp[i] = max(dp[i], dp[j] + 1) 
-    print(n - max(dp)) # 1 1 2 3 2 4 5
+
+# ----------------------------------------- 해설 소스코드 LIS 사용
+# def solution():
+#     n = int(input())
+#     arr = list(map(int, input().split()))
+#     arr.reverse()
+#     dp = [1] * n
+#     for i in range(1, n):
+#         for j in range(0, i):
+#             if arr[j] < arr[i]:
+#                 dp[i] = max(dp[i], dp[j] + 1) 
+#     print(n - max(dp)) # 1 1 2 3 2 4 5
     
-solution()
+# solution()
 
 
 
