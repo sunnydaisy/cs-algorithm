@@ -8,9 +8,8 @@
 # 경로 압축을 통해 시간복잡도를 줄인다.
 def find_parent(parent, x):
     if parent[x] != x:
-        return find_parent(parent, parent[x])
-    else:
-        return parent[x]
+        parent[x] = find_parent(parent, parent[x])
+    return parent[x]
 
 # 두 원소가 속한 집합을 합치기
 def union_parent(parent, a, b):
@@ -43,4 +42,7 @@ print('부모 테이블: ', end='')
 for i in range(1, 1 + v):
     print(parent[i], end=' ')
 print()
+
+
+
 
