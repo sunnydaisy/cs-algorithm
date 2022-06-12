@@ -4,11 +4,12 @@
 def solution(id_list, report, k):
 	n = len(id_list)
 	answer = [0] * n
+	report = dict()
 	
 	for rep in report:
 		line = rep.split(' ')
 		a, b = line[0], line[1] # 신고한사람, 당한사람
-
+		report[a] 
 
 	
 	return answer
