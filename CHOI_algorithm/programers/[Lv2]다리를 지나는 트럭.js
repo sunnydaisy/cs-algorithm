@@ -1,4 +1,4 @@
-// 1차 시도 실패.
+// 2차 성공
 function solution(bridge_length, weight, truck_weights) {
     var answer = 0;
     let truckInfos = truck_weights.map(w => ({
@@ -10,8 +10,7 @@ function solution(bridge_length, weight, truck_weights) {
 
     while (true) {
 
-        // 0. 시간 증가
-        answer++;
+
 
         // 1. 다리 건내고 있는 애들 건너기
         truckInfos = truckInfos.map(info => {
@@ -29,16 +28,16 @@ function solution(bridge_length, weight, truck_weights) {
             nowWeigths + truckInfos[nextIdx].weight <= weight) {
             // 트럭 추가
             truckInfos[nextIdx].isMoving = true;
+            truckInfos[nextIdx].time++;
             nextIdx++;
         }
 
+        // 2.5. 시간 증가
+        answer++;
+
+
         // 3. 다 건넜는지 확인하기
-        if (truckInfos.filter(info => info.time < bridge_length).length < 0) return answer;
-
-
-
-        console.log(truckInfos, answer)
-        if (answer === 5) return ;
+        if (truckInfos.filter(info => info.time <= bridge_length).length === 0) return answer;
     }
     return answer;
 }
