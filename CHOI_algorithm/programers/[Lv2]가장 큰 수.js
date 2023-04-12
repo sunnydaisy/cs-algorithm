@@ -4,7 +4,7 @@
 /*
 first trial failed
  */
-function getNextNum(str, i) {
+function getNextNum(str, i) {가
     if (!str[i + 1]) return [true, +str[str.length - 1]];
     return [false, +str[i + 1]];
 }
