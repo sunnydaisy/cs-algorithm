@@ -5,8 +5,8 @@ function getPermutation(arr, selectNumber) {
 
     arr.forEach((fixed, idx, origin) => {
         const rest = [...origin.slice(0, idx), ...origin.slice(idx + 1)];
-        const combinations = getPermutation(rest, selectNumber - 1);
-        const attached = combinations.map(el => [fixed, ...el]);
+        const permutation = getPermutation(rest, selectNumber - 1);
+        const attached = permutation.map(el => [fixed, ...el]);
         results.push(...attached);
     });
     return results;
