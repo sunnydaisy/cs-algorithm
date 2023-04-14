@@ -1,41 +1,43 @@
 /**
- * 1차 시도 실패 30/100
+ * findParents 를 전부 초기화 해주는 작업이 필요했었음
  */
 
-function findParent(parent, n) {
-    if (parent[n] !== n) parent[n] = findParent(parent, parent[n]);
-    return parent[n];
+function findParents(parents, n) {
+    if (parents[n] !== n) parents[n] = findParents(parents, parents[n]);
+    return parents[n];
 }
 
-function unionParent(parent, a, b) {
-    a = findParent(parent, a);
-    b = findParent(parent, b);
-    if (a < b) parent[b] = a;
-    else parent[a] = b;
+function unionParents(parents, a, b) {
+    a = findParents(parents, a);
+    b = findParents(parents, b);
+    if (a < b) parents[b] = a;
+    else parents[a] = b;
 }
 
-function getDiff(arr) {
-    let answer = 0;
-    let target = arr[0];
-    arr.forEach(v => {
-        v === target ? answer++ : answer--
+function getDiff(parents) {
+    let count = 0;
+    let target;
+    parents.slice(1).forEach((v, i) => {
+        if (i === 0) {
+            target = findParents(parents, v); // 이부분
+        }
+        if (target === findParents(parents, v)) count++; // 이부분
+        else count--;
     });
-    return Math.abs(answer);
+    return Math.abs(count);
 }
 
 function solution(n, wires) {
-    let parent = new Array(n + 1).fill(0).map((_, i) => i);
-    var answer = 1000000000;
-    wires.forEach((removeTarget, i) => {
-        let tmpWires = [...wires.slice(0, i), ...wires.slice(i + 1)];
-        for (let wire of tmpWires) {
-            let [x, y] = wire;
-            unionParent(parent, x, y);
-        }
-        answer = Math.min(answer, getDiff(parent.slice(1)));
-        parent = new Array(n + 1).fill(0).map((_, i) => i);
+    var answer = 100;
+
+    wires.forEach((removeTarget, removeIdx) => {
+        let parents = new Array(n + 1).fill(0).map((_, i) => i);
+        wires.forEach(([a, b], i) => {
+            if (i !== removeIdx) {
+                unionParents(parents, a, b);
+            }
+        });
+        answer = Math.min(answer, getDiff(parents))
     })
-
-
     return answer;
 }
