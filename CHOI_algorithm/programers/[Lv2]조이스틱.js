@@ -1,5 +1,6 @@
 /**
  * 1차 시도 실패 74.1 / 100.0
+ * 2차 시도 실패 74.1 / 100.0
  */
 function leftTargetLength(name, idx) {
     let result = 0;
